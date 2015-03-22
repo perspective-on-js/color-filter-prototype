@@ -17,7 +17,9 @@
 
         var filterImageData = new jsfeat.matrix_t(width, height, jsfeat.U8_t | jsfeat.C1_t);
         var code = jsfeat.COLOR_RGBA2GRAY;
-        jsfeat.imgproc.filter(imageData.data, width, height, filterImageData, code);
+        jsfeat.imgproc.filter(imageData.data, width, height, filterImageData, code, function(r, g, b, a){
+            return g;
+        });
 
         var data_u32 = new Uint32Array(imageData.data.buffer);
         var alpha = (0xff << 24);
