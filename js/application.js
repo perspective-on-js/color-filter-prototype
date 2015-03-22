@@ -3,6 +3,9 @@
     var context = canvas.getContext('2d');
     var original;
 
+	var threshold = 50;
+
+
     function loadImage(url, callback){
         var image = new Image();
         image.onload = function(){
@@ -22,7 +25,7 @@
 
             var d = Math.abs(r - target_r) + Math.abs(g - target_g) + Math.abs(b - target_b);
 
-            return (d < 50) ? 255: 0;
+            return (d < threshold) ? 255: 0;
         });
 
         var data_u32 = new Uint32Array(imageData.data.buffer);
