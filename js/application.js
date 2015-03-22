@@ -18,7 +18,11 @@
         var filterImageData = new jsfeat.matrix_t(width, height, jsfeat.U8_t | jsfeat.C1_t);
         var code = jsfeat.COLOR_RGBA2GRAY;
         jsfeat.imgproc.filter(imageData.data, width, height, filterImageData, code, function(r, g, b, a){
-            return g;
+            var target_r = 150, target_g = 175, target_b = 75;
+
+            var d = Math.abs(r - target_r) + Math.abs(g - target_g) + Math.abs(b - target_b);
+
+            return (d < 50) ? 255: 0;
         });
 
         var data_u32 = new Uint32Array(imageData.data.buffer);
