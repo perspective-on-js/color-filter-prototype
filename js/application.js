@@ -4,7 +4,11 @@
     var original;
 
 	var threshold = 50;
-
+    var thresholdSlider = document.getElementById('threshold');
+    thresholdSlider.value = threshold;
+    thresholdSlider.addEventListener('change', function(){
+	    threshold = thresholdSlider.value;
+    });
 
     function loadImage(url, callback){
         var image = new Image();
@@ -39,9 +43,14 @@
         context.putImageData(imageData, 0, 0)
     }
 
-    loadImage('/image/sample.jpg', function(image){
-        original = image;
+    function draw() {
 	    context.drawImage(original, 0, 0, canvas.width, canvas.height);
         filter();
+        requestAnimationFrame(draw);
+    }
+
+    loadImage('/image/sample.jpg', function(image){
+        original = image;
+        draw();
     });
 })()
